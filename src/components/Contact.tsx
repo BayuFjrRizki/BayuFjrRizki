@@ -38,16 +38,27 @@ export function Contact() {
         email: "",
         message: "",
     });
-    const [isSubmitting, setIsSubmitting] = useState(false);
 
-    const handleSubmit = async (e: React.FormEvent) => {
+    const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        setIsSubmitting(true);
-        // Simulate form submission
-        await new Promise((resolve) => setTimeout(resolve, 1000));
-        setIsSubmitting(false);
+
+        // Build WhatsApp message
+        const phoneNumber = "6287781981373";
+        const message = `Halo, saya *${formData.name}*
+
+Email: ${formData.email}
+
+Pesan:
+${formData.message}`;
+
+        // Encode message for URL
+        const encodedMessage = encodeURIComponent(message);
+
+        // Open WhatsApp
+        window.open(`https://wa.me/${phoneNumber}?text=${encodedMessage}`, "_blank");
+
+        // Reset form
         setFormData({ name: "", email: "", message: "" });
-        alert("Message sent!");
     };
 
     return (
@@ -116,17 +127,10 @@ export function Contact() {
                                     </div>
                                     <Button
                                         type="submit"
-                                        disabled={isSubmitting}
-                                        className="w-full bg-primary hover:bg-primary/90 h-12 text-lg rounded-xl"
+                                        className="w-full bg-primary hover:bg-primary/90 h-12 text-lg rounded-xl group"
                                     >
-                                        {isSubmitting ? (
-                                            <span className="animate-pulse">Sending...</span>
-                                        ) : (
-                                            <>
-                                                {t("contact.send")}
-                                                <Send className="ml-2 w-5 h-5" />
-                                            </>
-                                        )}
+                                        <MessageCircle className="mr-2 w-5 h-5 group-hover:animate-bounce" />
+                                        {t("contact.send")}
                                     </Button>
                                 </form>
                             </CardContent>

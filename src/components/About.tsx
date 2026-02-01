@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { useI18n } from "@/lib/i18n";
 import { Badge } from "@/components/ui/badge";
@@ -66,8 +67,14 @@ export function About() {
 
                             {/* Main card */}
                             <div className="relative bg-gradient-to-br from-slate-800 to-slate-900 rounded-3xl p-8 border border-white/10 h-full flex flex-col items-center justify-center">
-                                <div className="w-32 h-32 rounded-full bg-gradient-to-br from-primary to-blue-400 flex items-center justify-center text-5xl font-bold text-white mb-6">
-                                    BFR
+                                <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-primary/50 mb-6 relative">
+                                    <Image
+                                        src="/avatar.jpg"
+                                        alt="Bayu Fajar Rizki"
+                                        fill
+                                        className="object-cover"
+                                        priority
+                                    />
                                 </div>
                                 <h3 className="text-2xl font-bold mb-2">Bayu Fajar Rizki</h3>
                                 <p className="text-primary font-medium mb-6">{t("hero.role")}</p>

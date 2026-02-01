@@ -13,6 +13,11 @@ export const metadata: Metadata = {
   description: "Professional freelancer specializing in web development, design, and data analytics. Building digital solutions that matter.",
   keywords: ["freelancer", "web developer", "designer", "data analyst", "Indonesia", "Next.js", "Laravel", "WordPress"],
   authors: [{ name: "Bayu Fajar Rizki" }],
+  icons: {
+    icon: "/favicon.svg",
+    shortcut: "/favicon.svg",
+    apple: "/favicon.svg",
+  },
   openGraph: {
     title: "Bayu Fajar Rizki | Freelancer",
     description: "Professional freelancer specializing in web development, design, and data analytics.",

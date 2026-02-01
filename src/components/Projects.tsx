@@ -17,7 +17,10 @@ import {
     Smartphone,
     Database,
     X,
-    ZoomIn
+    ZoomIn,
+    MessageCircle,
+    Package,
+    Clock
 } from "lucide-react";
 
 type Category = "all" | "web" | "design" | "data";
@@ -94,6 +97,24 @@ const projects: Project[] = [
         description: "Digital advertising campaign visuals",
         tech: ["Photoshop", "Illustrator"],
         image: "/projects/ads.png",
+        icon: Palette,
+    },
+    {
+        id: 10,
+        category: "design",
+        title: "Flyer Design",
+        description: "Eye-catching flyers for events and promotions",
+        tech: ["Photoshop", "Illustrator", "Canva"],
+        image: "/projects/flyer.png",
+        icon: Palette,
+    },
+    {
+        id: 11,
+        category: "design",
+        title: "Custom Design",
+        description: "Bespoke design solutions tailored to your needs",
+        tech: ["Photoshop", "Illustrator", "CorelDraw"],
+        image: "/projects/custom.png",
         icon: Palette,
     },
     {
@@ -313,7 +334,7 @@ export function Projects() {
                             animate={{ scale: 1, opacity: 1 }}
                             exit={{ scale: 0.9, opacity: 0 }}
                             transition={{ type: "spring", damping: 25, stiffness: 300 }}
-                            className="relative max-w-5xl w-full max-h-[90vh] overflow-hidden rounded-2xl"
+                            className="relative max-w-5xl w-full max-h-[90vh] overflow-y-auto rounded-2xl bg-background"
                             onClick={(e) => e.stopPropagation()}
                         >
                             {/* Image */}
@@ -329,8 +350,8 @@ export function Projects() {
 
                             {/* Project Info */}
                             <div className="bg-background/95 backdrop-blur-sm p-6 border-t border-white/10">
-                                <div className="flex items-start justify-between gap-4">
-                                    <div>
+                                <div className="flex flex-col md:flex-row items-start justify-between gap-6">
+                                    <div className="flex-1">
                                         <Badge
                                             variant="secondary"
                                             className="mb-2 bg-primary/10 text-primary border-0"
@@ -345,6 +366,37 @@ export function Projects() {
                                         <p className="text-muted-foreground mb-4">
                                             {selectedProject.description}
                                         </p>
+
+                                        {/* Category Specific Info */}
+                                        {selectedProject.category === "web" && (
+                                            <div className="bg-primary/5 rounded-lg p-4 mb-4 border border-primary/20">
+                                                <div className="flex items-center gap-2 mb-2">
+                                                    <Package className="w-4 h-4 text-primary" />
+                                                    <span className="font-semibold text-primary">Includes:</span>
+                                                </div>
+                                                <ul className="text-sm text-muted-foreground space-y-1 ml-6">
+                                                    <li>✓ Domain & Hosting Setup</li>
+                                                    <li>✓ Maintenance Fee (1 tahun)</li>
+                                                    <li>✓ SSL Certificate</li>
+                                                    <li>✓ Technical Support</li>
+                                                </ul>
+                                            </div>
+                                        )}
+
+                                        {selectedProject.category === "design" && (
+                                            <div className="bg-primary/5 rounded-lg p-4 mb-4 border border-primary/20">
+                                                <div className="flex items-center gap-2 mb-2">
+                                                    <Clock className="w-4 h-4 text-primary" />
+                                                    <span className="font-semibold text-primary">Pricing Model:</span>
+                                                </div>
+                                                <ul className="text-sm text-muted-foreground space-y-1 ml-6">
+                                                    <li>✓ Project-based / Monthly</li>
+                                                    <li>✓ Max 2x major revisions included</li>
+                                                    <li>⚠️ Additional fee for more revisions</li>
+                                                </ul>
+                                            </div>
+                                        )}
+
                                         <div className="flex flex-wrap gap-2">
                                             {selectedProject.tech.map((tech) => (
                                                 <Badge
@@ -356,6 +408,24 @@ export function Projects() {
                                                 </Badge>
                                             ))}
                                         </div>
+                                    </div>
+
+                                    {/* Order Button */}
+                                    <div className="w-full md:w-auto">
+                                        <Button
+                                            size="lg"
+                                            className="w-full md:w-auto bg-green-600 hover:bg-green-700 text-white px-6 py-6 text-lg rounded-xl group"
+                                            onClick={() => {
+                                                const phoneNumber = "6287781981373";
+                                                const serviceName = selectedProject.title;
+                                                const message = `Halo, saya ingin service ini: *${serviceName}*`;
+                                                const encodedMessage = encodeURIComponent(message);
+                                                window.open(`https://wa.me/${phoneNumber}?text=${encodedMessage}`, "_blank");
+                                            }}
+                                        >
+                                            <MessageCircle className="mr-2 w-5 h-5 group-hover:animate-bounce" />
+                                            Pesan Sekarang
+                                        </Button>
                                     </div>
                                 </div>
                             </div>

@@ -24,7 +24,7 @@ export function Footer() {
                         href="#home"
                         className="text-xl font-bold bg-gradient-to-r from-primary to-blue-400 bg-clip-text text-transparent"
                     >
-                        BFR
+                        Bayu
                     </a>
 
                     {/* Copyright */}
